@@ -1,18 +1,31 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-require('dotenv').config()
+require("dotenv").config();
+const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
+const cors = require("cors");
 
-app.use(cors())
-app.use(express.static('public'))
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
-});
+const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
 
+mongoose
+    .connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log("Connected to DB successfully");
 
+        app.use(cors());
+        app.use(express.static("public"));
 
+        // Connect the server to the routers
+        app.use("/", indexRouter);
+        app.use("/api/users", apiRouter);
 
-
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log('Your app is listening on port ' + listener.address().port)
-})
+        const listener = app.listen(process.env.PORT || 3000, () => {
+            console.log(
+                "Your app is listening on port " + listener.address().port
+            );
+        });
+    });
