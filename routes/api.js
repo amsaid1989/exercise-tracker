@@ -56,6 +56,8 @@ router.post("/:_id/exercises", (req, res) => {
                         });
                     })
                     .catch((err) => {
+                        console.error(err);
+
                         res.render("error", {
                             errorMsg: `Error: failed to add exercise (${err})`,
                         });
