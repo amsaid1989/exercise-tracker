@@ -7,6 +7,8 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 
+// Attempt connecting to the database and establish the app settings
+// if the connection is successful
 mongoose
     .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
@@ -20,7 +22,8 @@ mongoose
         app.set("views", "./views");
         app.set("view engine", "pug");
 
-        app.use(cors());
+        app.use(cors()); // To enable testing the app by freeCodeCamp
+
         app.use(express.static("public"));
 
         // Connect the server to the routers
@@ -34,5 +37,5 @@ mongoose
         });
     })
     .catch((err) => {
-        console.log("Error connecting to the database:", err);
+        console.error("Error connecting to the database:", err);
     });
