@@ -5,10 +5,10 @@ const userSchema = new mongoose.Schema({
 });
 
 const exerciseSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true, index: true },
+    username: { type: String, required: true, index: true },
     description: { type: String, required: true },
     duration: { type: Number, required: true },
-    date: { type: Date },
+    date: { type: String },
 });
 
 module.exports = { userSchema, exerciseSchema };

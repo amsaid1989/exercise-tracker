@@ -22,7 +22,7 @@ function addExercise(username, description, duration, date) {
         username: username,
         description: description,
         duration: Number(duration),
-        date: dateObj,
+        date: dateObj.toDateString(),
     });
 
     return doc.save();

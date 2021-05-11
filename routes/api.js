@@ -50,9 +50,9 @@ router.post("/:_id/exercises", (req, res) => {
                         res.json({
                             _id: user[0]["_id"],
                             username: user[0].username,
-                            description: doc.get("description"),
-                            duration: doc.get("duration"),
                             date: doc.get("date"),
+                            duration: doc.get("duration"),
+                            description: doc.get("description"),
                         });
                     })
                     .catch((err) => {
