@@ -16,6 +16,10 @@ mongoose
     .then(() => {
         console.log("Connected to DB successfully");
 
+        // Setting the view engine
+        app.set("views", "./views");
+        app.set("view engine", "pug");
+
         app.use(cors());
         app.use(express.static("public"));
 
@@ -28,4 +32,7 @@ mongoose
                 "Your app is listening on port " + listener.address().port
             );
         });
+    })
+    .catch((err) => {
+        console.log("Error connecting to the database:", err);
     });
